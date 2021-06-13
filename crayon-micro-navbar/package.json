@@ -1,0 +1,55 @@
+{
+  "name": "@crayon/crayon-micro-navbar",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve --port 9011",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "serve:standalone": "vue-cli-service serve --mode standalone"
+  },
+  "dependencies": {
+    "ant-design-vue": "^1.5.4",
+    "core-js": "^3.6.5",
+    "single-spa-vue": "^2.1.0",
+    "systemjs-webpack-interop": "^2.3.7",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.13.0",
+    "vue-router": "^3.1.3",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^10.2.0",
+    "node-sass": "^4.14.0",
+    "eslint": "^6.7.2",
+    "sass-loader": "^10.1.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-cli-plugin-single-spa": "~1.3.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

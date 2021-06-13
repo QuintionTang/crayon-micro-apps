@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Crayon Vue Microfrontends</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="importmap-type" content="systemjs-importmap" />
+        <script type="systemjs-importmap">
+            {
+                "imports": {
+                    "crayon-navbar": "http://localhost:9011/js/app.js",
+                    "crayon-account": "http://localhost:9012/js/app.js",
+                    "crayon-products": "http://localhost:9013/js/app.js",
+                    "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.7/system/single-spa.min.js",
+                    "vue": "https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js",
+                    "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@3.0.7/dist/vue-router.min.js"
+                }
+            }
+        </script>
+        <link
+            rel="preload"
+            href="https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.7/system/single-spa.min.js"
+            as="script"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="preload"
+            href="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"
+            as="script"
+            crossorigin="anonymous"
+        />
+        <script src="https://unpkg.com/import-map-overrides@2.3.3/dist/import-map-overrides.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/system.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/amd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-exports.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-register.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/use-default.min.js"></script>
+    </head>
+    <body>
+        <script>
+            (function () {
+                Promise.all([
+                    System.import("single-spa"),
+                    System.import("vue"),
+                    System.import("vue-router"),
+                ]).then(function ([singleSpa, Vue, VueRouter]) {
+                    Vue.use(VueRouter);
+
+                    singleSpa.registerApplication(
+                        "crayon-navbar",
+                        () => System.import("crayon-navbar"),
+                        (location) => true
+                    );
+                    singleSpa.registerApplication(
+                        "crayon-account",
+                        () => System.import("crayon-account"),
+                        (location) => location.pathname.startsWith("/account")
+                    );
+
+                    singleSpa.registerApplication(
+                        "crayon-products",
+                        () => System.import("crayon-products"),
+                        (location) => location.pathname.startsWith("/products")
+                    );
+
+                    singleSpa.start();
+                });
+            })();
+        </script>
+        <import-map-overrides-full
+            show-when-local-storage="overrides-ui"
+        ></import-map-overrides-full>
+
+        <style type="text/css">
+            body {
+                marigin: 0px !important;
+                padding: 0px !important;
+                position: relation;
+                text-align: center;
+            }
+            #single-spa-application:crayon-navbar {
+                position: fixed;
+                width: 100%;
+                height: 60px;
+                left: 0px;
+                top: 10px;
+                z-index: 999;
+            }
+        </style>
+    </body>
+</html>
